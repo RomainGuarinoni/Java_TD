@@ -81,6 +81,7 @@ public class Signal { // coucou alex
             }
             else{
                 somme+=tab[0];
+
             }
         }
         return somme;
