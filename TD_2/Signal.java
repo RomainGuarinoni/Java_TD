@@ -43,10 +43,8 @@ public class Signal { // coucou alex
             this.tab = new float[frequence * (int) this.duration];
         } else {
             float[] sub_tab = new float[(this.tab).length / frequence];
-            int j = 0;
-            for (int i = 0; i < (this.tab).length; i = i + frequence) {
+            for (int i = 0, j = 0 ; i < (this.tab).length; i = i + frequence, j++) {
                 sub_tab[j] = this.tab[i];
-                j++;
             }
             this.tab = sub_tab;
         }
@@ -66,15 +64,15 @@ public class Signal { // coucou alex
         float somme = 0;
         if (((tab.length) - 1) - i >= n) {
             for (int j = 0; j <= n; j++) {
-                somme = somme + tab[i + j];
+                somme += tab[i + j];
             }
         } else {// peut etre rajouter confdition si le point est un exterme pour ne pa qs
                 // rentrer dans la boucle 1
             for (int j = 0; (i + j) <= tab.length - 1; j++) {
-                somme = somme + tab[i + j];
+                somme += tab[i + j];
             }
             for (int j = 0; j < (n - ((tab.length - 1) - i)); j++) {
-                somme = somme + tab[tab.length - 1];
+                somme += tab[tab.length - 1];
             }
         }
         return somme;
@@ -84,15 +82,15 @@ public class Signal { // coucou alex
         float somme = 0;
         if ((i - n) >= 0) {
             for (int j = 1; j <= n; j++) {
-                somme = somme + tab[i - j];
+                somme += tab[i - j];
             }
         } else {// peut etre rajouter confdition si le point ezst un exterme pour ne pa qs
                 // rentrer dans la boucle 1
             for (int j = 1; (i - j) >= 0; j++) {
-                somme = somme + tab[i - j];
+                somme += tab[i - j];
             }
             for (int j = 0; j < n - i; j++) {
-                somme = somme + tab[0];
+                somme += tab[0];
             }
         }
         return somme;
