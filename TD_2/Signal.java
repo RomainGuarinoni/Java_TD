@@ -1,4 +1,4 @@
-public class Signal {
+public class Signal { // coucou alex
 
     public float[] tab;
     private int frequence; // Je choisis (int) pcq sinon ca me casse les couilles
