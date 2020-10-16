@@ -55,6 +55,7 @@ class exercice_2 {
         int tab[] = { 1, 2, 32, 4 };
         System.out.println(sommeTableau(tab));
        nombrePremier(200);
+       System.out.println("bonjour");
        System.out.println(Math.sqrt(50));
     }
 
