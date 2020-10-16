@@ -1,7 +1,7 @@
 public class Signal { // coucou alex
 
     public float[] tab;
-    private int frequence; // Je choisis (int) pcq sinon ca me casse les couilles
+    private int frequence; // Je choisis (int) pcq sinon ca me casse les signals
     private int duration;
 
     // Les trois fonctions constructeurs de la classe
