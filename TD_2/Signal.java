@@ -1,3 +1,5 @@
+package TD_2;
+
 public class Signal { // coucou alex
 
     public float[] tab;
