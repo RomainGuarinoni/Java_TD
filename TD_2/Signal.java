@@ -62,17 +62,12 @@ public class Signal { // coucou alex
 
     public float sum_right(int n, float[] tab, int i) {
         float somme = 0;
-        if (((tab.length) - 1) - i >= n) {
-            for (int j = 0; j <= n; j++) {
-                somme += tab[i + j];
+        for(int j=0;j<=n;j++){
+            if(j+i<tab.length){
+                somme+=tab[j+i];
             }
-        } else {// peut etre rajouter confdition si le point est un exterme pour ne pa qs
-                // rentrer dans la boucle 1
-            for (int j = 0; (i + j) <= tab.length - 1; j++) {
-                somme += tab[i + j];
-            }
-            for (int j = 0; j < (n - ((tab.length - 1) - i)); j++) {
-                somme += tab[tab.length - 1];
+            else{
+                somme+=tab[tab.length-1];
             }
         }
         return somme;
@@ -80,17 +75,13 @@ public class Signal { // coucou alex
 
     public float sum_left(int n, float[] tab, int i) {
         float somme = 0;
-        if ((i - n) >= 0) {
-            for (int j = 1; j <= n; j++) {
-                somme += tab[i - j];
+        for(int j=1;j<=n;j++){
+            if(i-j>=0){
+                somme+=tab[i-j];
             }
-        } else {// peut etre rajouter confdition si le point ezst un exterme pour ne pa qs
-                // rentrer dans la boucle 1
-            for (int j = 1; (i - j) >= 0; j++) {
-                somme += tab[i - j];
-            }
-            for (int j = 0; j < n - i; j++) {
-                somme += tab[0];
+            else{
+                somme+=tab[0];
+
             }
         }
         return somme;
