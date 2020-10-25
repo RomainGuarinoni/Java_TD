@@ -27,5 +27,9 @@ public class Main {
         printArray(s1.sub_sampling(3)); // Si on rentre 3Hz ça ne marche pas !
         System.out.println("\n\nMethode 2 ------------ \n\n");
         printArray(s2.filtered_signal(1));
+        System.out.println("\n\nMethode correlation ------------ \n\n");
+        Signal s3 = new Signal(4, arr_method_2);
+        double[] arr_method_3 = { 1, 2, 4, 4, 5, 1, 7, 8 };
+        System.out.println(s3.coef_correlation(arr_method_3));
     }
 }

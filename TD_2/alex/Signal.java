@@ -77,4 +77,34 @@ public class Signal {
         else
             return right_sum(arr, index + 1, n - 1) + arr[index];
     }
+
+    private double signal_mean(double[] arr) {
+        double res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            res += arr[i];
+        }
+        return res / arr.length;
+    }
+
+    private double sum_value_and_mean(double[] signal1, double[] signal2) {
+        double signal1_mean = signal_mean(signal1);
+        double signal2_mean = signal_mean(signal2);
+        double res = 0;
+        for (int i = 1; i < signal1.length; i++) {
+            res += (signal1[i] - signal1_mean) * (signal2[i] - signal2_mean);
+        }
+        return res;
+
+    }
+
+    public double coef_correlation(double[] signal) {
+        if (signal.length != this.signal_values.length) {
+            System.out.println("Les deux signaux n'ont pas la même taille :  " + signal.length + "  et  "
+                    + this.signal_values.length);
+            return -1;
+        }
+        return sum_value_and_mean(this.signal_values, signal)
+                / (Math.sqrt(sum_value_and_mean(this.signal_values, this.signal_values))
+                        * Math.sqrt(sum_value_and_mean(signal, signal)));
+    }
 }
