@@ -47,6 +47,12 @@ public class Complexe {
     }
 
     public void print(Complexe c) {
-        System.out.println(c.re + "+" + "i" + c.im);
+        System.out.println(c.re + " + " + "i " + c.im);
+    }
+
+    public void printArray(Complexe[] c) {
+        for (int i = 0; i < c.length; i++) {
+            print(c[i]);
+        }
     }
 }
