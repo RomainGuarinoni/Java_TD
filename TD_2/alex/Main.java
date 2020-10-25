@@ -7,6 +7,12 @@ public class Main {
         }
     }
 
+    private static void printArrayComplexe(Complexe[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i].re + "+i" + arr[i].im);
+        }
+    }
+
     private static Boolean array_is_only_zero(double[] arr) {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] != 0)
@@ -31,5 +37,10 @@ public class Main {
         double[] arr_method_3 = { 1, 2, 4, 4, 5, 1, 7, 8 };
         System.out.println("coef de correlation entre s3 et s2  :  " + s2.coef_correlation(arr_method_3));
         System.out.println("réponse pour deux signaux de taille diff : " + s2.coef_correlation(arr_method_1));
+        FFT test = new FFT();
+        Complexe res[] = test.fft(arr_method_1);
+        printArrayComplexe(res);
+
     }
+
 }
