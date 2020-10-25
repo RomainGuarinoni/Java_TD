@@ -22,9 +22,10 @@ public class Main {
         double[] arr_method_2 = { 1, 2, 3, 4, 5, 6, 7, 8 };
         Signal s1 = new Signal(4, arr_method_1);
         Signal s2 = new Signal(4, arr_method_2);
+        System.out.println("Methode 1 ------------ \n\n");
         printArray(s1.sub_sampling(2)); // Quand on rentre 2Hz ça marche
         printArray(s1.sub_sampling(3)); // Si on rentre 3Hz ça ne marche pas !
-        System.out.println("\n\nMethod 2 ------------ \n\n");
+        System.out.println("\n\nMethode 2 ------------ \n\n");
         printArray(s2.filtered_signal(1));
     }
 }

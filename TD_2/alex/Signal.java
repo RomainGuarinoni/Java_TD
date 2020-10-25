@@ -29,7 +29,7 @@ public class Signal {
     public double[] sub_sampling(double new_frequency) {
         double duration = this.signal_values.length;
         if (sub_sampling_frequency_not_correct(new_frequency)) {
-            System.out.println("Nouvelle fréquence incorrecte !");
+            System.out.println("\n\nNouvelle fréquence " + new_frequency + " incorrecte !");
             return new double[(int) this.frequency * (int) duration];
         }
 
