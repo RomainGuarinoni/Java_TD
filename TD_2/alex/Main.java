@@ -40,8 +40,15 @@ public class Main {
         // original data
         for (int i = 0; i < N; i++) {
             signal[i] = new Complexe(i, 0);
-            signal[i] = new Complexe(-2 * Math.random() + 1, 0);
+            // signal[i] = new Complexe(-2 * Math.random() + 1, 0);
+            signal[i] = new Complexe(Math.sin(i), 0);
         }
+
+        for (int i = 0; i < N; i++) {
+            System.out.print(Math.sin(i) + ",");
+        }
+        System.out.println("");
+
         complexe.printArray(signal);
         FFT fft = new FFT();
         System.out.println("\n\nLa transformée de Fourier du signal précédent donne :\n");
