@@ -145,6 +145,25 @@ public class Polynome {
         return new double[] { a, b };
     }
 
+    public Polynome[] genTableauPoly(int nbPolynome) {
+        Polynome[] res = new Polynome[nbPolynome];
+        for (int i = 0; i < nbPolynome; i++) {
+            res[i] = new Polynome();
+        }
+        return res;
+    }
+
+    public void printTableauPoly(Polynome[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
+    }
+
+    // Je peux pas faire Newton parce que faut faire des division et je sais pas
+    // comment faire. Par contre faut aussi solve le pb des zeros pour le degre
+    // des polynomes.
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
@@ -158,8 +177,11 @@ public class Polynome {
          * System.out.println(p.primitivePolynome(p));
          * 
          * Polynome n = p.produitInterne(p, q); System.out.println(n);
+         * System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec
+         * -1x^2+4x+2
          */
-        System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec -1x^2+4x+2
+        Polynome t[] = p.genTableauPoly(3);
+        p.printTableauPoly(t);
 
     }
 
