@@ -123,38 +123,44 @@ public class Polynome {
     }
 
     public Polynome produitInterne(Polynome P, Polynome Q) {
-        int nouveauDegre = P.degre + Q.degre;
+        int nouveauDegre = P.degre + Q.degre - 1; // C'est encore à cause de mon code bancale le -1
         Polynome res = new Polynome(nouveauDegre, new double[nouveauDegre]);
         for (int i = 0; i < P.degre; i++) {
             for (int j = 0; j < Q.degre; j++) {
-                System.out.print("i: " + i + "   j: " + j + "   p[i]: " + P.coefs[i] + "    q[j]: " + Q.coefs[j]
-                        + "    mul: " + Q.coefs[j] * P.coefs[i]);
                 res.coefs[i + j] += P.coefs[i] * Q.coefs[j];
-                System.out.println("   donc  " + res.coefs[i + j]);
             }
         }
         return res;
     }
 
+    public double[] rechercheZeroDicho(double a, double b, double e, Polynome P) {
+        while (b - a > e) {
+            double m = (a + b) / 2;
+            if (P.evalPolynome(a) * P.evalPolynome(m) <= 0) {
+                b = m;
+            } else {
+                a = m;
+            }
+        }
+        return new double[] { a, b };
+    }
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
-        Polynome q = new Polynome();
-        System.out.println(q);
         /*
+         * Polynome q = new Polynome(); System.out.println(q);
          * System.out.println(p.evalPolynome(2));
          * System.out.println(p.evalPolynomeRec(2, p.degre - 1)); Polynome q = new
          * Polynome(); System.out.println(q); Polynome res = q.additionPolynome(p, q);
          * System.out.println(res); System.out.println(p.produitExterne(2, p));
          * System.out.println(p.derivPolynome(p));
          * System.out.println(p.primitivePolynome(p));
+         * 
+         * Polynome n = p.produitInterne(p, q); System.out.println(n);
          */
+        System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec -1x^2+4x+2
 
-        Polynome n = p.produitInterne(p, q);
-        System.out.println(n);
-        for (int i = 0; i < n.degre; i++) {
-            System.out.print(n.coefs[i] + "  ");
-        }
     }
 
 }
