@@ -9,6 +9,11 @@ public class Polynome {
         readCoefs();
     }
 
+    public Polynome(int degre, double[] coefs) {
+        this.degre = degre;
+        this.coefs = coefs;
+    }
+
     private int readDegre() {
         System.out.print("Rentrez le degré du polynome : ");
         Scanner sc = new Scanner(System.in);
@@ -61,6 +66,19 @@ public class Polynome {
         } else {
             return this.coefs[degre] * Math.pow(X, degre) + evalPolynomeRec(X, degre - 1);
         }
+    }
+
+    public Polynome additionPolynome(Polynome P, Polynome Q) {
+        int degre;
+        if (P.degre > Q.degre)
+            degre = P.degre;
+        else
+            degre = Q.degre;
+        double[] coefs = new double[degre];
+        for (int i = 0; i < degre; i++) {
+            coefs[i] = P.coefs[i] + Q.coefs[i];
+        }
+        return new Polynome(degre, coefs);
 
     }
 
@@ -69,5 +87,9 @@ public class Polynome {
         System.out.println(p);
         System.out.println(p.evalPolynome(2));
         System.out.println(p.evalPolynomeRec(2, p.degre - 1));
+        Polynome q = new Polynome();
+        System.out.println(q);
+        Polynome res = q.additionPolynome(p, q);
+        System.out.println(res);
     }
 }
