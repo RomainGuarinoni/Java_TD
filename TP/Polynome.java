@@ -200,7 +200,6 @@ public class Polynome {
         p.printTableauPoly(t);
         System.out.println(p.sommeTableauP(t));
         System.out.println(p.produitInterneTableauP(t));
-
     }
 
 }
