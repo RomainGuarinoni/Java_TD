@@ -43,8 +43,21 @@ public class Polynome {
         return res;
     }
 
+    public double evaluer(double X) {
+        double res = 0;
+        for (int i = degre - 1; i >= 0; i--) {
+            if (degre == 0) {
+                res += this.coefs[i];
+            } else {
+                res += this.coefs[i] * Math.pow(X, i);
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
+        System.out.println(p.evaluer(2));
     }
 }
