@@ -6,6 +6,7 @@ public class Polynome {
 
     public Polynome() {
         this.degre = readDegre();
+        this.degre += 1; // Quickfix parce que je sais pas coder
         readCoefs();
     }
 
@@ -121,17 +122,39 @@ public class Polynome {
         return res;
     }
 
+    public Polynome produitInterne(Polynome P, Polynome Q) {
+        int nouveauDegre = P.degre + Q.degre;
+        Polynome res = new Polynome(nouveauDegre, new double[nouveauDegre]);
+        for (int i = 0; i < P.degre; i++) {
+            for (int j = 0; j < Q.degre; j++) {
+                System.out.print("i: " + i + "   j: " + j + "   p[i]: " + P.coefs[i] + "    q[j]: " + Q.coefs[j]
+                        + "    mul: " + Q.coefs[j] * P.coefs[i]);
+                res.coefs[i + j] += P.coefs[i] * Q.coefs[j];
+                System.out.println("   donc  " + res.coefs[i + j]);
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
+        Polynome q = new Polynome();
+        System.out.println(q);
         /*
          * System.out.println(p.evalPolynome(2));
          * System.out.println(p.evalPolynomeRec(2, p.degre - 1)); Polynome q = new
          * Polynome(); System.out.println(q); Polynome res = q.additionPolynome(p, q);
          * System.out.println(res); System.out.println(p.produitExterne(2, p));
          * System.out.println(p.derivPolynome(p));
+         * System.out.println(p.primitivePolynome(p));
          */
-        System.out.println(p.primitivePolynome(p));
+
+        Polynome n = p.produitInterne(p, q);
+        System.out.println(n);
+        for (int i = 0; i < n.degre; i++) {
+            System.out.print(n.coefs[i] + "  ");
+        }
     }
 
 }
