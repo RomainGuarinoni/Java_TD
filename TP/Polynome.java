@@ -82,14 +82,23 @@ public class Polynome {
 
     }
 
+    public Polynome produitExterne(double scalaire) {
+        double[] coefs = new double[this.degre];
+        for (int i = 0; i < this.degre; i++) {
+            coefs[i] = scalaire * this.coefs[i];
+        }
+        return new Polynome(this.degre, coefs);
+    }
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
         System.out.println(p.evalPolynome(2));
         System.out.println(p.evalPolynomeRec(2, p.degre - 1));
-        Polynome q = new Polynome();
-        System.out.println(q);
-        Polynome res = q.additionPolynome(p, q);
-        System.out.println(res);
+        /*
+         * Polynome q = new Polynome(); System.out.println(q); Polynome res =
+         * q.additionPolynome(p, q); System.out.println(res);
+         */
+        System.out.println(p.produitExterne(2));
     }
 }
