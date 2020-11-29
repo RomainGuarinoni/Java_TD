@@ -33,6 +33,14 @@ public class Polynome {
         }
     }
 
+    private double[] popFirstValue(double[] arr) {
+        double[] res = new double[arr.length];
+        for (int i = 1; i < arr.length; i++) {
+            res[i - 1] = arr[i];
+        }
+        return res;
+    }
+
     public String toString() {
         String res = "";
         for (int i = degre - 1; i >= 0; i--) {
@@ -82,12 +90,22 @@ public class Polynome {
 
     }
 
-    public Polynome produitExterne(double scalaire) {
+    public Polynome produitExterne(double scalaire, Polynome P) {
         double[] coefs = new double[this.degre];
-        for (int i = 0; i < this.degre; i++) {
-            coefs[i] = scalaire * this.coefs[i];
+        for (int i = 0; i < P.degre; i++) {
+            coefs[i] = scalaire * P.coefs[i];
         }
-        return new Polynome(this.degre, coefs);
+        return new Polynome(P.degre, coefs);
+    }
+
+    public Polynome derivPolynome(Polynome P) {
+        Polynome res = new Polynome(P.degre, P.coefs);
+        for (int i = 0; i < P.degre; i++) {
+            res.coefs[i] = res.coefs[i] * i;
+        }
+        res.coefs = popFirstValue(res.coefs);
+        res.degre -= 1;
+        return res;
     }
 
     public static void main(String[] args) {
@@ -98,7 +116,7 @@ public class Polynome {
         /*
          * Polynome q = new Polynome(); System.out.println(q); Polynome res =
          * q.additionPolynome(p, q); System.out.println(res);
+         * System.out.println(p.produitExterne(2, p));
          */
-        System.out.println(p.produitExterne(2));
+        System.out.println(p.derivPolynome(p));
     }
-}
