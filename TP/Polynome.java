@@ -5,26 +5,26 @@ public class Polynome {
     private double[] coefs = new double[50];
 
     public Polynome() {
-        this.degre = read_degre();
-        read_coefs();
+        this.degre = readDegre();
+        readCoefs();
     }
 
-    private int read_degre() {
+    private int readDegre() {
         System.out.print("Rentrez le degré du polynome : ");
         Scanner sc = new Scanner(System.in);
         return sc.nextInt();
     }
 
-    private double read_double() {
+    private double readDouble() {
         System.out.print("Veuillez saisir un coefficient : ");
         Scanner sc = new Scanner(System.in);
         return sc.nextDouble();
     }
 
-    private void read_coefs() {
+    private void readCoefs() {
         System.out.println("Il faut rentrer des nombres avec des virgules et pas des points");
         for (int i = 0; i < this.degre; i++) {
-            this.coefs[i] = read_double();
+            this.coefs[i] = readDouble();
         }
     }
 
@@ -43,7 +43,7 @@ public class Polynome {
         return res;
     }
 
-    public double evaluer(double X) {
+    public double evalPolynome(double X) {
         double res = 0;
         for (int i = degre - 1; i >= 0; i--) {
             if (degre == 0) {
@@ -55,9 +55,19 @@ public class Polynome {
         return res;
     }
 
+    public double evalPolynomeRec(double X, int degre) {
+        if (degre == 0) {
+            return this.coefs[0];
+        } else {
+            return this.coefs[degre] * Math.pow(X, degre) + evalPolynomeRec(X, degre - 1);
+        }
+
+    }
+
     public static void main(String[] args) {
         Polynome p = new Polynome();
         System.out.println(p);
-        System.out.println(p.evaluer(2));
+        System.out.println(p.evalPolynome(2));
+        System.out.println(p.evalPolynomeRec(2, p.degre - 1));
     }
 }
