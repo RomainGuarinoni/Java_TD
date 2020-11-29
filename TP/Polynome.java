@@ -160,6 +160,22 @@ public class Polynome {
 
     }
 
+    public Polynome sommeTableauP(Polynome[] arr) {
+        Polynome res = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            res = arr[0].additionPolynome(res, arr[i]);
+        }
+        return res;
+    }
+
+    public Polynome produitInterneTableauP(Polynome[] arr) {
+        Polynome res = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            res = arr[0].produitInterne(res, arr[i]);
+        }
+        return res;
+    }
+
     // Je peux pas faire Newton parce que faut faire des division et je sais pas
     // comment faire. Par contre faut aussi solve le pb des zeros pour le degre
     // des polynomes.
@@ -182,6 +198,8 @@ public class Polynome {
          */
         Polynome t[] = p.genTableauPoly(3);
         p.printTableauPoly(t);
+        System.out.println(p.sommeTableauP(t));
+        System.out.println(p.produitInterneTableauP(t));
 
     }
 
