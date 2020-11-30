@@ -36,8 +36,4 @@ public class Polynome_Creux {
         return sc.nextDouble();
     }
 
-    public static void main(String[] args) {
-        Polynome_Creux p = new Polynome_Creux();
-        p.print();
-    }
 }
