@@ -42,6 +42,14 @@ public class Polynome {
         return res;
     }
 
+    private double abs(double number) {
+        if (number > 0) {
+            return number;
+        } else {
+            return -1 * number;
+        }
+    }
+
     public String toString() {
         String res = "";
         for (int i = degre - 1; i >= 0; i--) {
@@ -60,11 +68,7 @@ public class Polynome {
     public double evalPolynome(double X) {
         double res = 0;
         for (int i = degre - 1; i >= 0; i--) {
-            if (degre == 0) {
-                res += this.coefs[i];
-            } else {
-                res += this.coefs[i] * Math.pow(X, i);
-            }
+            res += this.coefs[i] * Math.pow(X, i);
         }
         return res;
     }
@@ -100,13 +104,17 @@ public class Polynome {
     }
 
     public Polynome derivPolynome(Polynome P) {
-        Polynome res = new Polynome(P.degre, P.coefs);
+        /*
+         * Polynome res = new Polynome(P.degre, P.coefs); for (int i = 0; i < res.degre;
+         * i++) { res.coefs[i] = res.coefs[i] * i; } res.coefs =
+         * popFirstValue(res.coefs); res.degre -= 1; return res;
+         */
+        double res[] = new double[P.degre];
         for (int i = 0; i < P.degre; i++) {
-            res.coefs[i] = res.coefs[i] * i;
+            res[i] = P.coefs[i] * i;
         }
-        res.coefs = popFirstValue(res.coefs);
-        res.degre -= 1;
-        return res;
+        res = popFirstValue(res);
+        return new Polynome(P.degre - 1, res);
     }
 
     public Polynome primitivePolynome(Polynome P) {
@@ -145,6 +153,20 @@ public class Polynome {
         return new double[] { a, b };
     }
 
+    public double rechercheZeroNewton(double a, double e, Polynome P) {
+        double f = P.evalPolynome(a);
+        Polynome dPoly = P.derivPolynome(P);
+        double df = dPoly.evalPolynome(a);
+        int n = 0;
+        while (n < 10) {
+            a = a - (f / df);
+            f = P.evalPolynome(a);
+            df = dPoly.evalPolynome(a);
+            n++;
+        }
+        return a;
+    }
+
     public Polynome[] genTableauPoly(int nbPolynome) {
         Polynome[] res = new Polynome[nbPolynome];
         for (int i = 0; i < nbPolynome; i++) {
@@ -176,8 +198,7 @@ public class Polynome {
         return res;
     }
 
-    // Je peux pas faire Newton parce que faut faire des division et je sais pas
-    // comment faire. Par contre faut aussi solve le pb des zeros pour le degre
+    // . Par contre faut aussi solve le pb des zeros pour le degre
     // des polynomes.
 
     public static void main(String[] args) {
@@ -192,14 +213,15 @@ public class Polynome {
          * System.out.println(p.derivPolynome(p));
          * System.out.println(p.primitivePolynome(p));
          * 
-         * Polynome n = p.produitInterne(p, q); System.out.println(n);
-         * System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec
-         * -1x^2+4x+2
+         * Polynome n = p.produitInterne(p, q); System.out.println(n); Polynome t[] =
+         * p.genTableauPoly(3); p.printTableauPoly(t);
+         * System.out.println(p.sommeTableauP(t));
+         * System.out.println(p.produitInterneTableauP(t));
          */
-        Polynome t[] = p.genTableauPoly(3);
-        p.printTableauPoly(t);
-        System.out.println(p.sommeTableauP(t));
-        System.out.println(p.produitInterneTableauP(t));
+        System.out.println(p.evalPolynome(0));
+        System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec -1x^2+4x+2
+        System.out.println(p.rechercheZeroNewton(0, 0.001, p)); // avec -1x^2+4x+2
+        // System.out.println(p.derivPolynome(p));
     }
 
 }
