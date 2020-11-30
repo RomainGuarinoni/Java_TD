@@ -50,6 +50,10 @@ public class Polynome {
         }
     }
 
+    public int get_degre() {
+        return this.degre;
+    }
+
     public String toString() {
         String res = "";
         for (int i = degre - 1; i >= 0; i--) {
@@ -82,16 +86,19 @@ public class Polynome {
     }
 
     public Polynome additionPolynome(Polynome P, Polynome Q) {
-        int degre;
-        if (P.degre > Q.degre)
-            degre = P.degre;
-        else
-            degre = Q.degre;
-        double[] coefs = new double[degre];
-        for (int i = 0; i < degre; i++) {
-            coefs[i] = P.coefs[i] + Q.coefs[i];
+        double[] res;
+        if (P.degre > Q.degre) {
+            res = P.coefs;
+            for (int i = 0; i < Q.degre; i++) {
+                res[i] = P.coefs[i] + Q.coefs[i];
+            }
+        } else {
+            res = Q.coefs;
+            for (int i = 0; i < P.degre; i++) {
+                res[i] = P.coefs[i] + Q.coefs[i];
+            }
         }
-        return new Polynome(degre, coefs);
+        return new Polynome(degre, res);
 
     }
 
@@ -151,12 +158,10 @@ public class Polynome {
         double f = P.evalPolynome(a);
         Polynome dPoly = P.derivPolynome(P);
         double df = dPoly.evalPolynome(a);
-        int n = 0;
-        while (n < 10) {
+        while ((abs(f / df) > e)) {
             a = a - (f / df);
             f = P.evalPolynome(a);
             df = dPoly.evalPolynome(a);
-            n++;
         }
         return a;
     }
@@ -190,30 +195,6 @@ public class Polynome {
             res = arr[0].produitInterne(res, arr[i]);
         }
         return res;
-    }
-
-    // . Par contre faut aussi solve le pb des zeros pour le degre
-    // des polynomes.
-
-    public static void main(String[] args) {
-        Polynome p = new Polynome();
-        System.out.println(p);
-        /*
-         * Polynome q = new Polynome(); System.out.println(q);
-         * System.out.println(p.evalPolynome(2));
-         * System.out.println(p.evalPolynomeRec(2, p.degre - 1)); Polynome q = new
-         * Polynome(); System.out.println(q); Polynome res = q.additionPolynome(p, q);
-         * System.out.println(res); System.out.println(p.produitExterne(2, p));
-         * System.out.println(p.derivPolynome(p));
-         * System.out.println(p.primitivePolynome(p));
-         * 
-         * Polynome n = p.produitInterne(p, q); System.out.println(n); Polynome t[] =
-         * p.genTableauPoly(3); p.printTableauPoly(t);
-         * System.out.println(p.sommeTableauP(t));
-         * System.out.println(p.produitInterneTableauP(t));
-         */
-        System.out.println(p.primitivePolynome(p));
-        // System.out.println(p.derivPolynome(p));
     }
 
 }
