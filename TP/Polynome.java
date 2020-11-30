@@ -104,11 +104,6 @@ public class Polynome {
     }
 
     public Polynome derivPolynome(Polynome P) {
-        /*
-         * Polynome res = new Polynome(P.degre, P.coefs); for (int i = 0; i < res.degre;
-         * i++) { res.coefs[i] = res.coefs[i] * i; } res.coefs =
-         * popFirstValue(res.coefs); res.degre -= 1; return res;
-         */
         double res[] = new double[P.degre];
         for (int i = 0; i < P.degre; i++) {
             res[i] = P.coefs[i] * i;
@@ -118,16 +113,15 @@ public class Polynome {
     }
 
     public Polynome primitivePolynome(Polynome P) {
-        Polynome res = new Polynome(P.degre, P.coefs);
+        double[] res = new double[P.degre + 1];
         for (int i = 0; i < P.degre; i++) {
-            res.coefs[i] = coefs[i] / (i + 1);
+            res[i] = P.coefs[i] / (i + 1);
         }
-        res.degre += 1;
-        for (int i = degre; i > 0; i--) {
-            res.coefs[i] = res.coefs[i - 1];
+        for (int i = P.degre; i > 0; i--) {
+            res[i] = res[i - 1];
         }
-        res.coefs[0] = 0;
-        return res;
+        res[0] = 0;
+        return new Polynome(P.degre + 1, res);
     }
 
     public Polynome produitInterne(Polynome P, Polynome Q) {
@@ -218,9 +212,7 @@ public class Polynome {
          * System.out.println(p.sommeTableauP(t));
          * System.out.println(p.produitInterneTableauP(t));
          */
-        System.out.println(p.evalPolynome(0));
-        System.out.println(p.rechercheZeroDicho(-2, 1, 0.001, p)[0]); // avec -1x^2+4x+2
-        System.out.println(p.rechercheZeroNewton(0, 0.001, p)); // avec -1x^2+4x+2
+        System.out.println(p.primitivePolynome(p));
         // System.out.println(p.derivPolynome(p));
     }
 
