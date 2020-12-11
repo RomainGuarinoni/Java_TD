@@ -231,7 +231,7 @@ public class Main {
         System.out.println(decimal_to_hex_reversed(257));
         System.out.println(2 / piViete(0.001, Math.sqrt(0.5), 1));
         System.out.println(operateurFleche(3, 2, 3));
-        int n = 4;
+        int n = 42;
         hanoi(n, "A", "C", "B");
     }
 }
