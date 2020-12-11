@@ -81,11 +81,75 @@ public class Main {
         return res;
     }
 
+    public static String tableFor_new(int min, int max, int y) {
+        String res = "";
+        for (int i = 1; i <= y; i++) {
+            res += "Tabble de multiplication du " + Integer.toString(i) + " :\n";
+            for (int j = min; j <= max; j++) {
+                res += line(i, j) + "\n";
+            }
+            res += "\n\n";
+        }
+        return res;
+    }
+
+    public static String tableWhile_new(int min, int max, int y) {
+        int i = 1;
+        int j = min;
+        String res = "";
+        while (i <= y) {
+            res += "Tabble de multiplication du " + Integer.toString(i) + " :\n";
+            j = min;
+            while (j <= max) {
+                res += line(i, j) + "\n";
+                j++;
+            }
+            res += "\n\n";
+            i++;
+        }
+        return res;
+    }
+
+    public static String affichage_new(int min, int max, int y) {
+        // Les if sont uniquement là pour aligner
+        String res = "     ";
+        for (int i = min; i <= max; i++) {
+            if (i > 9)
+                res += Integer.toString(i) + "   ";
+            else
+                res += Integer.toString(i) + "    ";
+        }
+        res += "\n";
+
+        for (int i = 1; i <= y; i++) {
+            if (10 <= i && i < 100) {
+                res += Integer.toString(i) + "   ";
+            } else {
+                res += Integer.toString(i) + "    ";
+            }
+            for (int j = min; j <= max; j++) {
+                if (i * j > 999)
+                    res += Integer.toString(i * j) + " ";
+                else if (i * j > 99)
+                    res += Integer.toString(i * j) + "  ";
+                else if (i * j > 9)
+                    res += Integer.toString(i * j) + "   ";
+                else
+                    res += Integer.toString(i * j) + "    ";
+
+            }
+            res += "\n";
+
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println(leclerc(8));
         System.out.println(line(1, 1));
         System.out.println(tableFor());
         System.out.println(tableWhile());
         System.out.println(affichage());
+        System.out.println(affichage_new(1, 10, 20));
     }
 }
