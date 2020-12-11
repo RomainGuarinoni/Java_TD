@@ -144,6 +144,80 @@ public class Main {
         return res;
     }
 
+    public static String convert_to_letter(int n) {
+        if (n == 10)
+            return "A";
+        else if (n == 11)
+            return "B";
+        else if (n == 12)
+            return "C";
+        else if (n == 13)
+            return "D";
+        else if (n == 14)
+            return "E";
+        else if (n == 15)
+            return "F";
+        return Integer.toString(n);
+    }
+
+    public static String decimal_to_hex(int n) {
+        String res = "0x" + sub_decimal_to_hex(n);
+        return res;
+    }
+
+    public static String decimal_to_hex_reversed(int n) {
+        return "0x" + sub_decimal_to_hex_reversed(n, 10, false);
+    }
+
+    public static String sub_decimal_to_hex(int n) {
+        if (n < 16) {
+            return convert_to_letter(n);
+        } else {
+            return sub_decimal_to_hex(n / 16) + convert_to_letter(n % 16);
+        }
+    }
+
+    public static String sub_decimal_to_hex_reversed(int n, int i, Boolean yes) {
+        if (i == -1) {
+            return "";
+        }
+        if ((n < Math.pow(16, i + 1) && n >= Math.pow(16, i))) {
+            yes = true;
+            return convert_to_letter((int) ((n - n % (Math.pow(16, i))) / (Math.pow(16, i))))
+                    + sub_decimal_to_hex_reversed((int) (n - (n - n % (Math.pow(16, i)))), i - 1, yes);
+        } else {
+            if (n / Math.pow(16, i) < 1 && yes == true)
+                return "0" + sub_decimal_to_hex_reversed((int) (n - (n - n % (Math.pow(16, i)))), i - 1, yes);
+            else
+                return sub_decimal_to_hex_reversed((int) (n - (n - n % (Math.pow(16, i)))), i - 1, yes);
+        }
+    }
+
+    public static double piViete(double e, double res, double total) {
+        if (Math.abs((2 / total) - Math.PI) > e) {
+            total *= res;
+            res = Math.sqrt(0.5 + 0.5 * res);
+            return piViete(e, res, total);
+        }
+        return total;
+    }
+
+    public static double operateurFleche(int m, int k, int n) {
+        if (k == 0) {
+            return Math.pow(m, n);
+        } else {
+            return Math.pow(operateurFleche(m, k - 1, n), n);
+        }
+    }
+
+    public static void hanoi(int n, String from, String temp, String to) {
+        if (n == 0)
+            return;
+        hanoi(n - 1, from, to, temp);
+        System.out.println("Bougez le disque " + n + " de " + from + " à " + to);
+        hanoi(n - 1, temp, from, to);
+    }
+
     public static void main(String[] args) {
         System.out.println(leclerc(8));
         System.out.println(line(1, 1));
@@ -153,5 +227,11 @@ public class Main {
         System.out.println(tableFor_new(1, 10, 12));
         System.out.println(tableWhile_new(2, 3, 2));
         System.out.println(affichage_new(1, 10, 20));
+        System.out.println(decimal_to_hex(257));
+        System.out.println(decimal_to_hex_reversed(257));
+        System.out.println(2 / piViete(0.001, Math.sqrt(0.5), 1));
+        System.out.println(operateurFleche(3, 2, 3));
+        int n = 4;
+        hanoi(n, "A", "C", "B");
     }
 }
