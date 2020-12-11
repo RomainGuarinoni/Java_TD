@@ -150,6 +150,8 @@ public class Main {
         System.out.println(tableFor());
         System.out.println(tableWhile());
         System.out.println(affichage());
+        System.out.println(tableFor_new(1, 10, 12));
+        System.out.println(tableWhile_new(2, 3, 2));
         System.out.println(affichage_new(1, 10, 20));
     }
 }
