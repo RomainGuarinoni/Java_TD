@@ -53,9 +53,9 @@ public class Algorithme_de_Cesar {
     }
 
     public static void main(String[] args) {
-        System.out.println(char_shift('z', 1, 1));
-        System.out.println(char_shift('f', 13, -1));
-        System.out.println(algo_cesar("Bonjour", 2, 1));
-        System.out.println(algo_cesar("Dqplqwt", 2, -1));
+        System.out.println("Conversion de : Bonjour ceci est un test !!");
+        System.out.println(algo_cesar("Bonjour ceci est un test !!", 2, 1));
+        System.out.println("Dans l'autre sens maintenant");
+        System.out.println(algo_cesar("Dqplqwt egek guv wp vguv", 2, -1));
     }
 }
