@@ -8,12 +8,12 @@ JC = javac
 
 CLASSES = Algorithme_de_Cesar.java
 
-default: classes run
+default: classes
 
 classes: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) *.class
 	
-run:
+cesar:
 	java Algorithme_de_Cesar

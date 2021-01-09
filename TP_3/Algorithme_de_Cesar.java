@@ -31,7 +31,6 @@ public class Algorithme_de_Cesar {
                 ascii = ascii + direction * 26 * -1;
             }
             return ascii_to_char(ascii);
-
         } else if (is_uppercase_letter(c)) {
             ascii = char_to_ascii(c) + shift * direction;
             if (!is_uppercase_letter(ascii_to_char(ascii))) {
