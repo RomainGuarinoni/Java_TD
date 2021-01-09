@@ -43,8 +43,19 @@ public class Algorithme_de_Cesar {
         }
     }
 
+    public static String algo_cesar(String str, int shift, int direction) {
+        String res = "";
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            res += char_shift(c, shift, direction);
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         System.out.println(char_shift('z', 1, 1));
         System.out.println(char_shift('f', 13, -1));
+        System.out.println(algo_cesar("Bonjour", 2, 1));
+        System.out.println(algo_cesar("Dqplqwt", 2, -1));
     }
 }
