@@ -1,8 +1,7 @@
 /**
- * Algorithme_de_Cesar
+ * Algorithme_de_Vigenere
  */
-
-public class Algorithme_de_Cesar {
+public class Algorithme_de_Vigenere {
     private static char ascii_to_char(int ascii) {
         return (char) ascii;
     }
@@ -42,22 +41,38 @@ public class Algorithme_de_Cesar {
         }
     }
 
-    public static String algo_cesar(String str, int shift, int direction) {
+    private static int get_relative_index(char c) {
+        char c_lowercase = Character.toLowerCase(c);
+        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        return alphabet.indexOf(c_lowercase);
+    }
+
+    public static String algo_vigenere(String str, String key, int direction) {
         String res = "";
+        String alphabet_lowercase = "abcdefghijklmnopqrstuvwxyz";
+        String alphabet_uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        int key_length = key.length();
         for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            res += char_shift(c, shift, direction);
+            char str_char = str.charAt(i);
+            char key_char = key.charAt(i % key_length);
+            int str_index = get_relative_index(str_char);
+            int key_index = get_relative_index(key_char);
+            int shift = (str_index + key_index * direction);
+            if (shift < 0) {
+                shift += 26;
+            }
+            int new_letter_index = shift % 26;
+            if (Character.isUpperCase(str_char)) {
+                res += alphabet_uppercase.charAt(new_letter_index);
+            } else {
+                res += alphabet_lowercase.charAt(new_letter_index);
+            }
         }
         return res;
     }
 
     public static void main(String[] args) {
-        System.out.println("début");
-        System.out.println("Conversion de : Bonjour ceci est un test !!");
-        System.out.println(algo_cesar("Bonjour ceci est un test !!", 2, 1));
-        System.out.println("Dans l'autre sens maintenant");
-        System.out.println(algo_cesar("Dqplqwt egek guv wp vguv", 2, -1));
-        System.out.println(algo_cesar("V", 20, 1));
-        System.out.println("fin");
+        System.out.println(algo_vigenere("PROGRAMMATION", "LINUX", 1));
+        System.out.println(algo_vigenere("AZBAOLUZUQTWA", "LINUX", -1));
     }
 }
