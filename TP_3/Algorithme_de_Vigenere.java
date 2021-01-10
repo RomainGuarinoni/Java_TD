@@ -57,14 +57,15 @@ public class Algorithme_de_Vigenere {
             char key_char = key.charAt(i % key_length);
             int str_index = get_relative_index(str_char);
             int key_index = get_relative_index(key_char);
-            int shift = (str_index + key_index * direction) % 26;
-            System.out.println(str_index);
-            System.out.println(key_index);
-            System.out.println(shift + "\n");
+            int shift = (str_index + key_index * direction);
+            if (shift < 0) {
+                shift += 26;
+            }
+            int new_letter_index = shift % 26;
             if (Character.isUpperCase(str_char)) {
-                res += alphabet_uppercase.charAt(shift);
+                res += alphabet_uppercase.charAt(new_letter_index);
             } else {
-                res += alphabet_lowercase.charAt(shift);
+                res += alphabet_lowercase.charAt(new_letter_index);
             }
         }
         return res;
@@ -72,6 +73,6 @@ public class Algorithme_de_Vigenere {
 
     public static void main(String[] args) {
         System.out.println(algo_vigenere("PROGRAMMATION", "LINUX", 1));
-        // System.out.println(algo_vigenere("AZBAOLUZUQTWA", "LINUX", -1));
+        System.out.println(algo_vigenere("AZBAOLUZUQTWA", "LINUX", -1));
     }
 }
