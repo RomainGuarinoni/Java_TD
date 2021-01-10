@@ -10,7 +10,7 @@ CLASSES = \
 	Algorithme_de_Cesar.java \
 	Algorithme_de_Vigenere.java
 
-default: classes vigenere
+default: classes decrypt
 
 classes: $(CLASSES:.java=.class)
 
@@ -22,3 +22,7 @@ cesar:
 
 vigenere: 
 	java Algorithme_de_Vigenere
+
+decrypt:
+	javac -cp '.:GestionDesFichiers.jar' Decrypter.java
+	java -cp '.:GestionDesFichiers.jar' Decrypter
