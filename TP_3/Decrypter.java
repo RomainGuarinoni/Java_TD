@@ -79,23 +79,31 @@ public class Decrypter {
         return res;
     }
 
-    private static int find_min_index(double[] arr) {
-        int min_index = 0;
-        double min_value = 0;
+    private static double[] shift_array(int shift, double[] arr) {
+        double[] res = new double[26];
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] < min_value) {
-                min_value = arr[i];
-                min_index = i;
+            if (i + shift >= 26) {
+                res[i] = arr[i + shift - 26];
+            } else {
+                res[i] = arr[i + shift];
             }
         }
-        return min_index;
+        return res;
     }
 
     private static char find_key(double[] frequency_arr) {
-        double[] reference_frequency = { 7.97, 1.07, 3.47, 4, 17.9, 1.01, 1.04, 1.35, 7.34, 0.3, 0.069, 5.48, 3.17,
-                7.02, 5.27, 2.8, 1.13, 6.64, 7.72, 7.28, 5.74, 1.17, 0.059, 0.449, 0.309, 0.04 };
-        double[] difference_array = substract_arrays_square(reference_frequency, frequency_arr);
-        int min_index = find_min_index(difference_array);
+        final double[] reference_frequency = { 7.97, 1.07, 3.47, 4, 17.9, 1.01, 1.04, 1.35, 7.34, 0.3, 0.069, 5.48,
+                3.17, 7.02, 5.27, 2.8, 1.13, 6.64, 7.72, 7.28, 5.74, 1.17, 0.059, 0.449, 0.309, 0.04 };
+        double min_value = 1000;
+        int min_index = 0;
+        for (int i = 0; i < frequency_arr.length; i++) {
+            double[] difference_array = substract_arrays_square(reference_frequency, shift_array(i, frequency_arr));
+            double difference_sum = sum_in_array(difference_array);
+            if (difference_sum < min_value) {
+                min_value = difference_sum;
+                min_index = i;
+            }
+        }
         char res = get_letter_from_index(min_index);
         return res;
     }
@@ -136,8 +144,9 @@ public class Decrypter {
         GestionDesFichiers f = new GestionDesFichiers("./textes/ActualiteMinesDouaiCesar.txt");
         String s = f.lireFichierTexte();
         double[] frequency_arr = apparition_frequency(s);
+        char key = find_key(frequency_arr);
         System.out.println(s);
-        System.out.println(find_key(frequency_arr));
-        System.out.println(algo_cesar(s, 10, -1));
+        System.out.println("The encoding key is probably : " + find_key(frequency_arr) + "\n\n");
+        System.out.println(algo_cesar(s, get_relative_index(key), -1));
     }
 }
