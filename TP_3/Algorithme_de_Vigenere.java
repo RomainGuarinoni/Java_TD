@@ -2,10 +2,6 @@
  * Algorithme_de_Vigenere
  */
 public class Algorithme_de_Vigenere {
-    private static char ascii_to_char(int ascii) {
-        return (char) ascii;
-    }
-
     private static int char_to_ascii(char c) {
         return (int) c;
     }
