@@ -148,5 +148,6 @@ public class Decrypter_cesar {
         System.out.println(s);
         System.out.println("The encoding key is probably : " + find_key(frequency_arr) + "\n\n");
         System.out.println(algo_cesar(s, get_relative_index(key), -1));
+
     }
 }

@@ -92,12 +92,36 @@ public class Decrypter_vigenere {
         // System.out.println(s);
         String letteronly = get_letters_only(s);
         //
-        for (int p = 1; p < 330; p++) {
+
+        double min = 1000;
+        double diff = 1000;
+        int minindex = 0;
+        for (int p = 1; p < s.length() / 3; p++) {
             String[] subtext_var = subtext(letteronly, p);
             // display_string_arr(subtext_var);
-            System.out.println(
-                    p + "  total : " + indice_coincidence_total(subtext_var, p) + " " + letteronly.length() / p);
-
+            if (letteronly.length() / p < 33) {
+                double coincide = indice_coincidence_total(subtext_var, p);
+                if (Math.abs(coincide - 0.0745) < diff) {
+                    diff = Math.abs(coincide - 0.0745);
+                    min = coincide;
+                    minindex = p;
+                }
+                System.out.println(p + "  total : " + coincide + " " + letteronly.length() / p);
+            }
         }
+        System.out.println(min + " " + minindex + " diff  " + diff);
+
+        // on a pas réussi mais on le faire avec ce site :
+        // https://www.apprendre-en-ligne.net/crypto/vigenere/decryptauto.html
+
+        // on s'est trompé sur l'indice p qui devait être la taille de la clef. Dans
+        // notre cas
+        // on a pris p comme le nombre de sous textes ... Au final on a pas réussi dans
+        // le temps
+        // imparti
+
+        // Après on a quand même réussi césar et à lire le fichier grâce à la
+        // compilation et exécution
+        // avec le flag -classpath. (voir le makefile)
     }
 }
