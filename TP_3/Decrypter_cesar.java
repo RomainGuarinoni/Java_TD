@@ -1,7 +1,7 @@
 import GestionDesFichiers.GestionDesFichiers;
 import java.util.Arrays;
 
-public class Decrypter {
+public class Decrypter_cesar {
     private static char ascii_to_char(int ascii) {
         return (char) ascii;
     }
