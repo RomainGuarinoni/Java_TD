@@ -1,7 +1,7 @@
 import GestionDesFichiers.GestionDesFichiers;
 import java.util.Arrays;
 
-public class Decrypter {
+public class Decrypter_cesar {
     private static char ascii_to_char(int ascii) {
         return (char) ascii;
     }
@@ -148,5 +148,6 @@ public class Decrypter {
         System.out.println(s);
         System.out.println("The encoding key is probably : " + find_key(frequency_arr) + "\n\n");
         System.out.println(algo_cesar(s, get_relative_index(key), -1));
+
     }
 }
