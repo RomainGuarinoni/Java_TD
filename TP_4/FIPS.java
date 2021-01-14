@@ -79,10 +79,48 @@ public class FIPS {
 
     }
 
+    private static Boolean notBetween(int value, int a, int b) {
+        return a > value || value > b;
+    }
+
+    private static Boolean run_test(int[] arr) {
+        Boolean res = true;
+        int[] nombre_occurence = new int[7];
+        int[] test_array = { 2267, 2733, 1079, 1421, 502, 748, 223, 402, 90, 223, 90, 223 };
+        int counter = 1;
+        int value = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == value) {
+                counter++;
+            } else {
+                if (counter > 6) {
+                    nombre_occurence[6]++;
+                } else {
+                    nombre_occurence[counter]++;
+                }
+                counter = 0;
+                if (value == 0) {
+                    value = 1;
+                } else {
+                    value = 0;
+                }
+            }
+        }
+        for (int i = 1, j = 0; i < 7; i++, j += 2) {
+            if (notBetween(nombre_occurence[i], test_array[j], test_array[j + 1])) {
+                res = false;
+            }
+
+        }
+        return res;
+
+    }
+
     public static void main(String[] args) {
         int[] dataset = generateDatset(20000);
         head_int_array(dataset);
         System.out.println("test monobit : " + monobit_test(dataset));
         System.out.println("test poker : " + poker_test(dataset));
+        System.out.println("test run : " + run_test(dataset));
     }
 }
