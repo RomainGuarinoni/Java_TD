@@ -7,8 +7,7 @@ JC = javac
 	$(JC) $(JFLAGS) $*.java
 
 CLASSES = \
-	FIPS.java \
-	Escargot.java
+	FIPS.java 
 
 default: classes escargot
 
@@ -21,4 +20,5 @@ fips:
 	java FIPS
 
 escargot:
-	java Escargot
+	javac -cp '.:ComplementTP4.jar' Escargot.java
+	java -cp '.:ComplementTP4.jar' Escargot

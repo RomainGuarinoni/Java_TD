@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner; // Import the Scanner class
+import tp4.timersEtDialoguesTP4;
 
 public class Escargot {
     private static int getRandomNumberInRange(int min, int max) {
