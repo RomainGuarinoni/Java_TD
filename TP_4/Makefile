@@ -6,14 +6,19 @@ JC = javac
 .java.class:
 	$(JC) $(JFLAGS) $*.java
 
-CLASSES = FIPS.java
+CLASSES = \
+	FIPS.java \
+	Escargot.java
 
-default: classes run
+default: classes escargot
 
 classes: $(CLASSES:.java=.class)
 
 clean:
 	$(RM) *.class
 	
-run:
+fips:
 	java FIPS
+
+escargot:
+	java Escargot

@@ -116,11 +116,37 @@ public class FIPS {
 
     }
 
+    public static Boolean long_run_test(int[] arr) {
+        int max_sequence = 0;
+        int counter = 1;
+        int value = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] == value) {
+                counter++;
+            } else {
+                if (counter > max_sequence) {
+                    max_sequence = counter;
+                }
+                counter = 0;
+                if (value == 0) {
+                    value = 1;
+                } else {
+                    value = 0;
+                }
+            }
+        }
+        if (max_sequence >= 34) {
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         int[] dataset = generateDatset(20000);
         head_int_array(dataset);
         System.out.println("test monobit : " + monobit_test(dataset));
         System.out.println("test poker : " + poker_test(dataset));
         System.out.println("test run : " + run_test(dataset));
+        System.out.println("test long run : " + long_run_test(dataset));
     }
 }
