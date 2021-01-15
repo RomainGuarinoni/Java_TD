@@ -17,6 +17,37 @@ public class Escargot {
         return getRandomNumberInRange(1, 6);
     }
 
+    private static void realistic() {
+        int escargot1 = 0;
+        int escargot2 = 0;
+        Boolean escargot1_can_start = false;
+        Boolean escargot2_can_start = false;
+        Boolean running = true;
+        int i = 0;
+        timersEtDialoguesTP4 dice = new timersEtDialoguesTP4();
+        while (running) {
+            int es1_throw = dice.lancerDe("Lancer de dé", "escargot 1");
+            int es2_throw = dice.lancerDe("Lancer de dé", "escargot 2");
+            if (escargot1_can_start) {
+                escargot1 += es1_throw;
+            }
+            if (escargot2_can_start) {
+                escargot2 += es2_throw;
+            }
+            if (es1_throw == 6) {
+                escargot1_can_start = true;
+            }
+            if (es2_throw == 6) {
+                escargot2_can_start = true;
+            }
+            if (escargot1 > 100 || escargot2 > 100) {
+                running = false;
+            }
+            i++;
+            System.out.println("Tour : " + i + "  /  e1 : " + escargot1 + " -  e2 : " + escargot2);
+        }
+    }
+
     private static void simplified_run() {
         int escargot1 = 0;
         int escargot2 = 0;
@@ -89,7 +120,8 @@ public class Escargot {
     }
 
     public static void main(String[] args) {
-        simplified_run();
-        semi_simplified_run();
+        // simplified_run();
+        // semi_simplified_run();
+        realistic();
     }
 }
